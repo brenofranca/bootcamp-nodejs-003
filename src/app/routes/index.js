@@ -1,9 +1,11 @@
-const express = require("express");
+const express = require('express')
 
-const router = express.Router();
+const router = express.Router()
 
-const UserController = require("../controllers/UserController");
+const UserController = require('../controllers/UserController')
 
-router.get("/", (req, res) => res.send("API Only!"));
+router.get('/', (req, res) => res.send('API Only!'))
 
-module.exports = router;
+router.post('/users', UserController.store)
+
+module.exports = router
