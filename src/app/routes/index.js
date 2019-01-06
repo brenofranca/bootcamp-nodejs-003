@@ -2,14 +2,12 @@ const express = require('express')
 
 const router = express.Router()
 
-const authMiddleware = require('../middlewares/auth')
-
-const UserController = require('../controllers/UserController')
-const SessionController = require('../controllers/SessionController')
+const controllers = require('../controllers')
+const middlewares = require('../middlewares')
 
 router.get('/', (req, res) => res.send('API Only!'))
 
-router.post('/users', UserController.store)
-router.post('/sessions', SessionController.store)
+router.post('/users', controllers.UserController.store)
+router.post('/sessions', controllers.SessionController.store)
 
 module.exports = router
