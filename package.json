@@ -6,6 +6,7 @@
     "start": "nodemon src/index.js"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "express": "~4.9.0",
     "mongoose": "^5.4.2"
