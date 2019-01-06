@@ -2,6 +2,8 @@ const express = require('express')
 
 const router = express.Router()
 
+const authMiddleware = require('../middlewares/auth')
+
 const UserController = require('../controllers/UserController')
 const SessionController = require('../controllers/SessionController')
 
