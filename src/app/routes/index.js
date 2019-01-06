@@ -21,4 +21,9 @@ router.post('/posts', controllers.PostController.store)
 router.put('/posts/:id', controllers.PostController.update)
 router.delete('/posts/:id', controllers.PostController.destroy)
 
+/**
+ *  Purchase Post REST API
+ */
+router.post('/purchases', controllers.PurchaseController.store)
+
 module.exports = router
