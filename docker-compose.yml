@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  web:
+    image: node_server
+    build: .
+    volumes:
+      - "./app:/src/app"
+    ports:
+      - "3000:3000"
