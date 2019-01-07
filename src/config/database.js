@@ -14,6 +14,6 @@ module.exports = {
     }
   },
   mongo: {
-    uri: 'mongodb://127.0.0.1:27017/challenge_3'
+    uri: process.env.MONGODB_URL
   }
 }
