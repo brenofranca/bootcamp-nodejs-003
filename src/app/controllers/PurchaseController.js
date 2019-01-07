@@ -10,17 +10,22 @@ class PurchaseController {
     const post = await Post.findById(postId).populate('author')
     const user = await User.findById(req.userId)
 
-    await Mail.sendMail({
-      from: 'Breno França <franciscobreno.si@gmail.com>',
-      to: post.author.email,
-      subject: `Solicitação de Compra: ${post.title}`,
-      html: `<h1>${content}</h1>`
-    })
-
     const purchase = await Purchase.create({
       content,
       author: user.id,
       post: post.id
+    })
+
+    await Mail.sendMail({
+      from: 'Breno França <franciscobreno.si@gmail.com>',
+      to: post.author.email,
+      subject: `Solicitação de Compra: ${post.title}`,
+      template: `purchases/create`,
+      context: {
+        user,
+        content,
+        post
+      }
     })
 
     return res.json(purchase)
