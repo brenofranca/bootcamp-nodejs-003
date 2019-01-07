@@ -1,7 +1,8 @@
 const User = require('../models/User')
 const Post = require('../models/Post')
 const Purchase = require('../models/Purchase')
-const Mail = require('../services/Mail')
+const PurchaseMail = require('../jobs/PurchaseMail')
+const Queue = require('../services/Queue')
 
 class PurchaseController {
   async store (req, res) {
@@ -16,17 +17,11 @@ class PurchaseController {
       post: post.id
     })
 
-    await Mail.sendMail({
-      from: 'Breno França <franciscobreno.si@gmail.com>',
-      to: post.author.email,
-      subject: `Solicitação de Compra: ${post.title}`,
-      template: `purchases/create`,
-      context: {
-        user,
-        content,
-        post
-      }
-    })
+    Queue.create(PurchaseMail.key, {
+      post,
+      user,
+      content
+    }).save()
 
     return res.json(purchase)
   }
