@@ -1,6 +1,6 @@
 const express = require('express')
 const validate = require('express-validation')
-
+const handle = require('express-async-handler')
 const router = express.Router()
 
 const controllers = require('../controllers')
@@ -12,12 +12,12 @@ router.get('/', (req, res) => res.send('API Only!'))
 router.post(
   '/users',
   validate(validators.User),
-  controllers.UserController.store
+  handle(controllers.UserController.store)
 )
 router.post(
   '/sessions',
   validate(validators.Session),
-  controllers.SessionController.store
+  handle(controllers.SessionController.store)
 )
 
 router.use(middlewares.Auth)
@@ -25,19 +25,19 @@ router.use(middlewares.Auth)
 /**
  *  Post REST API
  */
-router.get('/posts', controllers.PostController.index)
-router.get('/posts/:id', controllers.PostController.show)
+router.get('/posts', handle(controllers.PostController.index))
+router.get('/posts/:id', handle(controllers.PostController.show))
 router.post(
   '/posts',
   validate(validators.Post),
-  controllers.PostController.store
+  handle(controllers.PostController.store)
 )
 router.put(
   '/posts/:id',
   validate(validators.Post),
-  controllers.PostController.update
+  handle(controllers.PostController.update)
 )
-router.delete('/posts/:id', controllers.PostController.destroy)
+router.delete('/posts/:id', handle(controllers.PostController.destroy))
 
 /**
  *  Purchase Post REST API
@@ -45,7 +45,16 @@ router.delete('/posts/:id', controllers.PostController.destroy)
 router.post(
   '/purchases',
   validate(validators.Purchase),
-  controllers.PurchaseController.store
+  handle(controllers.PurchaseController.store)
+)
+
+/**
+ *  Sale Post REST API
+ */
+router.post(
+  '/sale',
+  validate(validators.Sale),
+  handle(controllers.SaleController.store)
 )
 
 module.exports = router
