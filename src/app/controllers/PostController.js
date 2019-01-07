@@ -2,7 +2,9 @@ const Post = require('../models/Post')
 
 class PostController {
   async index (req, res) {
-    const filters = {}
+    const filters = {
+      purchasedBy: null
+    }
 
     if (req.query.price_min || req.query.price_max) {
       filters.price = {}
