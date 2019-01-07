@@ -7,6 +7,7 @@ const Queue = kue.createQueue({
   redis: redisConfig
 })
 
+Queue.process(jobs.SaleMail.key, jobs.SaleMail.handle)
 Queue.process(jobs.PurchaseMail.key, jobs.PurchaseMail.handle)
 
 Queue.on('error', Sentry.captureException)

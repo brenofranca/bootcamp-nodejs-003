@@ -48,4 +48,13 @@ router.post(
   handle(controllers.PurchaseController.store)
 )
 
+/**
+ *  Sale Post REST API
+ */
+router.post(
+  '/sale',
+  validate(validators.Sale),
+  handle(controllers.SaleController.store)
+)
+
 module.exports = router

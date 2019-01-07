@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon src/index.js -e js njk html"
+    "start": "nodemon src/index.js -e js njk html hbs"
   },
   "dependencies": {
     "@sentry/node": "^4.4.2",
